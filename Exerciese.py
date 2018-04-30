@@ -376,3 +376,164 @@ def singleNumber1(self, nums):
         if val == 1:
             return key
 
+
+##########################################################################
+# 141. Linked List Cycle
+class Solution(object):
+    def hasCycle(self, head):
+        slow = fast = head
+        while fast and fast.next:
+            fast = fast.next.next
+            slow = slow.next
+            if slow == fast:
+                return True
+        return False
+
+##########################################################################
+# 155. Min Stack
+class MinStack(object):
+
+    def __init__(self):
+        self.stack = []
+        
+    def push(self, x):
+        self.stack.append((x, min(self.getMin(), x))) 
+           
+    def pop(self):
+        self.stack.pop()
+
+    def top(self):
+        if self.stack:
+            return self.stack[-1][0]
+        
+    def getMin(self):
+        if self.stack:
+            return self.stack[-1][1]
+        return sys.maxint      
+
+
+##########################################################################
+# 167. Two Sum II - Input array is sorted
+class Solution(object):
+    def twoSum(self, numbers, target):
+        """
+        :type numbers: List[int]
+        :type target: int
+        :rtype: List[int]
+        """
+        m, n = 0, len(numbers) - 1
+        while m<n:
+            tot=numbers[m] + numbers[n]
+            if tot == target:
+                return [m+1,n+1]
+            elif tot < target:
+                m+=1
+            else:
+                n-=1
+
+
+
+##########################################################################
+# 168. Excel Sheet Column Title
+
+class Solution:
+    def convertToTitle(self, n):
+        result = ''
+        distance = ord('A') 
+        while n > 0:
+            y = (n-1) % 26
+            n = (n-1) // 26
+            s = chr(y+distance)
+            result = ''.join((s, result))
+        return result
+
+
+##########################################################################
+# 169. Majority Element
+class Solution(object):
+    def majorityElement(self, nums):
+        dic = {}
+        for num in nums:
+            dic[num] = dic.get(num,0) + 1
+            if dic[num] >len(nums)/2:
+                return num
+
+
+
+
+##########################################################################
+# 171. Excel Sheet Column Number
+
+class Solution(object):
+    def titleToNumber(self, s):
+        """
+        :type s: str
+        :rtype: int
+        """
+        a = 0
+        for i, x in enumerate(s[::-1]):
+            a+=(ord(x)-64)*(26**i)
+        return a
+
+
+
+
+
+
+##########################################################################
+# 172. Factorial Trailing Zeroes
+class Solution(object):
+    def trailingZeroes(self, n):
+        num, i = 0,1
+        while 5**i <= n:
+            num += n//(5**i)
+            i+=1
+        return num
+
+
+
+
+##########################################################################
+# 175. Combine Two Tables
+select a.FirstName,a.LastName,b.city,b.state
+from Person a 
+left join Address b on a.personid=b.personid 
+
+
+
+
+##########################################################################
+# 176. Second Highest Salary
+select max(salary) as SecondHighestSalary  from Employee  where salary < (select max(salary) from Employee )
+
+
+
+##########################################################################
+# 181. Employees Earning More Than Their Managers
+select a.Name as Employee   from Employee a join Employee b on a.managerid = b.id where a.salary > b.salary
+
+
+
+##########################################################################
+# 182. Duplicate Emails
+select email from (
+select email,count(*) as count from Person group by email having count > 1) a
+
+
+
+##########################################################################
+# 183. Customers Who Never Order
+select a.name  as customers from customers a left join orders b on a.id=b.CustomerId where b.id is null 
+
+
+
+##########################################################################
+# 189. Rotate Array
+class Solution(object):
+    def rotate(self, nums, k):
+        nums[:] = nums[len(nums)-k:] + nums[:len(nums)-k]
+
+
+
+
+
