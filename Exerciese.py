@@ -534,6 +534,36 @@ class Solution(object):
         nums[:] = nums[len(nums)-k:] + nums[:len(nums)-k]
 
 
+##########################################################################
+# 601. Human Traffic of Stadium
+select distinct s.id, s.date, s.people
+from
+stadium s,
+(select
+s1.id
+from
+stadium s1,
+stadium s2,
+stadium s3
+where
+s2.id = s1.id+1 and s3.id = s1.id+2
+and
+s1.people>=100 and s2.people>=100 and s3.people>=100
+) ab
+where
+s.id between ab.id and ab.id+2
+
+
+##########################################################################
+# 626. Exchange Seats
+SELECT CASE WHEN id%2 = 0 THEN id-1
+            WHEN id%2 != 0 AND id != (SELECT MAX(id) FROM seat) THEN id+1
+            WHEN id%2 !=0 AND id = (SELECT MAX(id) FROM seat) THEN id
+            END AS id, 
+       student
+FROM seat 
+ORDER BY 1
+
 
 
 
