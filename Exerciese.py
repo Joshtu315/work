@@ -1,3 +1,65 @@
+
+
+###########################################################################
+# Pandas
+##########################################################################
+
+# read csv 
+pcm_amex=pd.read_csv("PartytoPCMAmex1.1.csv",delimiter="|")
+
+# write to csv 
+loan_null.to_csv('loan_null.csv')
+
+# count of unique 
+pcm_amex.uuid.nunique()
+
+# group by two columns and get count 
+temp=pcm_amex.groupby(['uuid', 'dt2_business']).size()
+
+# group by and count of unique of one column
+temp= pcm_amex.groupby('uuid').dt2_business.nunique()
+
+
+# select certain columns when one column match specfic values and sort
+pcm_amex.loc[(pcm_amex["uuid"] == "ffffe9a0-2030-48e4-a560-7db1e6a21605"),["uuid","dt2_business","amexindicator"]].sort_values(["dt2_business"], ascending=True)
+pcm_amex.loc[(pcm_amex["uuid"] in ("00003e23-d400-475d-9e21-dcb05bfd0c8f","ffffe9a0-2030-48e4-a560-7db1e6a21605")),["uuid","dt2_business","amexindicator"]].sort_values(["dt2_business"], ascending=True)
+
+test=party_null[party_null['Fund_Year']>2011]
+test1=test.IDN_MS_LOAN.unique()
+output=mtg_v[mtg_v['IDN_MS_LOAN'].isin(test1)]
+
+
+# data frame join two tables 
+mtg_party=pd.merge(mtg_new, loantoparty, left_on='IDN_MS_LOAN', right_on='idn_ms_loan', how='outer')
+
+# sum of null missing count by group 
+party_null.groupby(['Fund_Year'])['LastPaymentDate'].apply(lambda x: x.isnull().sum())
+
+# aggregate multiple columns 
+pla_aggre=pla.groupby('DT2_BUSINESS').agg({'OUTSTANDING_BALANCE':['size','mean'],'FACILITY_AMOUNT':['size','mean'],'AMT_COLLATERAL_ADVANCE':['size','mean'],'COLLATERAL_MKT_VALUE':['size','mean']})
+
+# group by having 
+dups=lal_pla_mcall.groupby(['FACILITY_KEY_ACCOUNT','MONTH_END_DATE']).size().loc[lambda x: x>1].sort_values()
+
+
+# convert to string 
+df[["A", "C"]] = df[["A", "C"]].astype(str) 
+mtg_miss['DT2_BUSINESS'] =  pd.to_datetime(mtg_miss['DT2_BUSINESS'], format='%m/%d/%Y')
+
+
+# reset index
+df = df.reset_index
+
+# round to int
+5//3
+# 1 
+
+# get remianing number
+5%3
+# 2
+
+
+
 class Wallet():
     def __init__(self, x):
         self.money=x
@@ -216,7 +278,7 @@ class Solution:
 # 58. Length of Last Word
 class Solution(object):
     def lengthOfLastWord(self, s):
-        retrun len(s.strip().split(" ")[-1])
+        return len(s.strip().split(" ")[-1])
 
 
 ##########################################################################
