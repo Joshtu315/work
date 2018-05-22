@@ -1,3 +1,6 @@
+#sql
+COALESCE(cast(limit as decimal(15,2)), LAST_VALUE(cast(limit as decimal(15,2)), TRUE) 
+OVER(PARTITION BY label,uuid,keyuuid ORDER BY from_unixtime(unix_timestamp(dt2_business , 'MM/dd/yyyy')) ROWS BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW))
 
 
 ###########################################################################
