@@ -2,6 +2,29 @@
 COALESCE(cast(limit as decimal(15,2)), LAST_VALUE(cast(limit as decimal(15,2)), TRUE) 
 OVER(PARTITION BY label,uuid,keyuuid ORDER BY from_unixtime(unix_timestamp(dt2_business , 'MM/dd/yyyy')) ROWS BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW))
 
+UPDATE table 
+   SET balance = 15000.000000000 
+ WHERE id = 11203
+
+DELETE P1.*
+FROM Person AS P1 LEFT JOIN
+(SELECT Min(P.Id) AS Id FROM Person AS P GROUP BY P.Email) AS P2
+ON P1.Id = P2.Id
+WHERE P2.Id Is Null
+
+INSERT INTO link (url, name)
+VALUES
+ ('http://www.oreilly.com','O''Reilly Media');
+
+for j in range(1,i)
+for i in xrange(2, n):
+for i, ch in enumerate(digits):
+for key, val in dic.items():
+
+while r*r > x:
+while m<n:
+
+
 
 ###########################################################################
 # Pandas
@@ -597,6 +620,17 @@ select a.name  as customers from customers a left join orders b on a.id=b.Custom
 class Solution(object):
     def rotate(self, nums, k):
         nums[:] = nums[len(nums)-k:] + nums[:len(nums)-k]
+
+
+
+##########################################################################
+# 196. Delete Duplicate Emails
+DELETE P1.*
+FROM Person AS P1 LEFT JOIN
+(SELECT Min(P.Id) AS Id FROM Person AS P GROUP BY P.Email) AS P2
+ON P1.Id = P2.Id
+WHERE P2.Id Is Null
+
 
 
 ##########################################################################
